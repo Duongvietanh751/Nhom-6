@@ -18,7 +18,7 @@
         </div>
     </div>
 </div>
-<form action="{{route('quantri.store')}}" method="post" enctype="multipart/form-data" >
+<form action="{{route('quantri.store')}}" method="POST" enctype="multipart/form-data" >
     @csrf
     <div class="row">
         <div class="col-lg-12">
@@ -31,15 +31,24 @@
                         <div class="col-md-4">
                             <div>
                                 <label for="name" class="form-label">Tên Sản Phẩm</label>
-                                <input type="text" class="form-control" name="ten_san_pham" id="name">
+                                <input type="text" class="form-control @error('ten_san_pham') is-invalid @enderror" name="ten_san_pham" id="name">
+                                @error('ten_san_pham')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div>
                                 <label for="name" class="form-label">Giá Sản Phẩm</label>
-                                <input type="number" class="form-control" name="gia_san_pham" id="name" value="0"> 
+                                <input type="number" class="form-control @error('gia_san_pham') is-invalid @enderror" name="gia_san_pham" id="name" value="0"> 
+                                @error('gia_san_pham')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div>
                                 <label for="name" class="form-label">Giá Khuyển Mại</label>
-                                <input type="number" class="form-control" name="gia_khuyen_mai" id="name" value="0">
+                                <input type="number" class="form-control @error('gia_khuyen_mai') is-invalid @enderror" name="gia_khuyen_mai" id="name" value="0">
+                                @error('gia_khuyen_mai')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div>
                                 <label for="name" class="form-label">Hình Ảnh</label>
@@ -65,7 +74,10 @@
                         <div class="col-md-4">
                             <div>
                                 <label for="name" class="form-label">Số Lượng</label>
-                                <input type="number" class="form-control" name="so_luong" id="name" value="0">
+                                <input type="number" class="form-control @error('so_luong') is-invalid @enderror" name="so_luong" id="name" value="0">
+                                @error('so_luong')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             {{-- <div>
                                 <label for="name" class="form-label">Ngày Nhập</label>
@@ -77,17 +89,23 @@
                             </div>
                             <div>
                                 <label for="name" class="form-label">Danh Mục</label>
-                                <select name="danh_muc_id" id="" class="form-select">
+                                <select name="danh_muc_id @error('danh_muc_id') is-invalid @enderror" id="" class="form-select">
                                     <option value="1">Thời Trang Nam</option>
                                     <option value="2">Thời Trang Nữ</option>
                                 </select>
+                                @error('danh_muc_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div>
                                 <label for="name" class="form-label">Trạng Thái</label>
-                                <select name="trang_thai" id="" class="form-select">
+                                <select name="trang_thai @error('trang_thai') is-invalid @enderror" id="" class="form-select">
                                     <option value="1">Còn Hàng</option>
                                     <option value="2">Hết Hàng</option>
                                 </select>
+                                @error('trang_thai')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                     </div>

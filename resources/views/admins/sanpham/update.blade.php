@@ -14,12 +14,12 @@
                     <li class="breadcrumb-item active">Thêm mới</li>
                 </ol>
             </div>
-
         </div>
     </div>
 </div>
-<form action="{{route('quantri.store')}}" method="post" enctype="multipart/form-data" >
+<form action="{{route('quantri.update',$SanPham->id)}}" method="post" enctype="multipart/form-data" >
     @csrf
+    @method('PUT')
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -99,7 +99,7 @@
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <button class="btn btn-primary" style="" type="submit">Save</button>
+                    <button class="btn btn-primary" style="" type="submit">Edit</button>
                 </div><!-- end card header -->
             </div>
         </div>

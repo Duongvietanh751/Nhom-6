@@ -18,6 +18,9 @@ class SanPham extends Model
         $san_pham = DB::table('sanphams')->where('id',$id)->first();
         return $san_pham;
     }
+    public function deleteProduct($id,$params){
+        DB::table('sanphams')->where('id',$id)->delete();
+    }
     protected $table='sanphams';
     protected $fillable = [
         'danh_muc_id',
