@@ -31,21 +31,21 @@
                         <div class="col-md-4">
                             <div>
                                 <label for="name" class="form-label">Tên Sản Phẩm</label>
-                                <input type="text" class="form-control @error('ten_san_pham') is-invalid @enderror" name="ten_san_pham" id="name">
+                                <input type="text" class="form-control @error('ten_san_pham') is-invalid @enderror" name="ten_san_pham" id="name" value="{{old('ten_san_pham')}}">
                                 @error('ten_san_pham')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div>
                                 <label for="name" class="form-label">Giá Sản Phẩm</label>
-                                <input type="number" class="form-control @error('gia_san_pham') is-invalid @enderror" name="gia_san_pham" id="name" value="0"> 
+                                <input type="number" class="form-control @error('gia_san_pham') is-invalid @enderror" name="gia_san_pham" id="name"value="{{old('gia_san_pham')}}"> 
                                 @error('gia_san_pham')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div>
                                 <label for="name" class="form-label">Giá Khuyển Mại</label>
-                                <input type="number" class="form-control @error('gia_khuyen_mai') is-invalid @enderror" name="gia_khuyen_mai" id="name" value="0">
+                                <input type="number" class="form-control @error('gia_khuyen_mai') is-invalid @enderror" name="gia_khuyen_mai" id="name" value="{{old('gia_khuyen_mai')}}">
                                 @error('gia_khuyen_mai')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -74,7 +74,7 @@
                         <div class="col-md-4">
                             <div>
                                 <label for="name" class="form-label">Số Lượng</label>
-                                <input type="number" class="form-control @error('so_luong') is-invalid @enderror" name="so_luong" id="name" value="0">
+                                <input type="number" class="form-control @error('so_luong') is-invalid @enderror" name="so_luong" id="name" value="{{old('so_luong')}}">
                                 @error('so_luong')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -89,7 +89,7 @@
                             </div>
                             <div>
                                 <label for="name" class="form-label">Danh Mục</label>
-                                <select name="danh_muc_id @error('danh_muc_id') is-invalid @enderror" id="" class="form-select">
+                                <select name="danh_muc_id" id="" class="form-select  @error('danh_muc_id') is-invalid @enderror">
                                     <option value="1">Thời Trang Nam</option>
                                     <option value="2">Thời Trang Nữ</option>
                                 </select>
@@ -99,7 +99,7 @@
                             </div>
                             <div>
                                 <label for="name" class="form-label">Trạng Thái</label>
-                                <select name="trang_thai @error('trang_thai') is-invalid @enderror" id="" class="form-select">
+                                <select name="trang_thai" id="" class="form-select @error('trang_thai') is-invalid @enderror">
                                     <option value="1">Còn Hàng</option>
                                     <option value="2">Hết Hàng</option>
                                 </select>

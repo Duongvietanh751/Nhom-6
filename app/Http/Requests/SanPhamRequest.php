@@ -46,8 +46,8 @@ class SanPhamRequest extends FormRequest
                 'so_luong.required' => 'Số lượng bắt buộc điền',
                 'so_luong.numeric' => 'Số lượng phải là số',
                 'so_luong.min' => 'Số lượng không hợp lệ',
-                'danh_muc_id.required' => 'Danh Mục bắt buộc chọn',
-                'danh_muc_id.in' => 'Danh Mục không hợp lệ',
+                'danh_muc_id.required' => 'Danh Mục bắt buộc điền',
+                'danh_muc_id.in' => 'Danh Muc không hợp lệ',
                 'trang_thai.required' => 'Trạng thái bắt buộc điền',
                 'trang_thai.in' => 'Trạng thái không hợp lệ',
     ];

@@ -39,7 +39,6 @@ class SanPhamController extends Controller
     {
         if($request->isMethod('POST')){
             $params= $request->except('_token');
-            dd($params);
 
             if($request->hasFile('hinh_anh')){
                 $filename=$request->file('hinh_anh')->store('uploads/quantri','public');
