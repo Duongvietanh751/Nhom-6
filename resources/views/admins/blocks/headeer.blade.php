@@ -747,7 +747,7 @@
                             <div class="collapse menu-dropdown" id="sidebarDashboards">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="" class="nav-link" data-key="t-analytics"> Danh sách </a>
+                                        <a href="{{route('indexDanhMuc')}}" class="nav-link" data-key="t-analytics"> Danh sách </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="dashboard-crm.html" class="nav-link" data-key="t-crm"> Thêm Mới </a>
