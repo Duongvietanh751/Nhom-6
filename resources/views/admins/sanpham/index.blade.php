@@ -22,13 +22,29 @@
 
     <div class="row">
         <div class="col-lg-12">
+            @if (session('success'))
+            <div class="alert alert-success">
+                {{session('success')}}
+            </div>
+        @endif
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <h5 class="card-title mb-0">Danh Sách sản Phẩm</h5>
                     <a href="{{route('quantri.create')}}" class="btn btn-primary mb-3">Thêm Mới</a>
+                    <form action="{{route('quantri.index')}}" method="GET">
+                        @csrf
+                        <div class="input-group">
+                            <select name="searchTrangThai" id="" class="form-select">
+                                <option value="">Chọn Trạng Thái</option>
+                                <option value="1">Hiển Thị</option>
+                                <option value="2">Ẩn</option>
+                            </select>
+                            <input type="text" class="form-control" name="search" placeholder="Tìm kiếm sản phẩm">
+                            <button class="btn btn-secondary" type="submit">Tìm Kiếm</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="card-body">
-                    <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle"
+                <div class="card-body ">
+                    <table id="example" class="table  table-bordered dt-responsive nowrap table-striped align-middle"
                         style="width:100%">
                         <thead>
                             <tr>
@@ -60,17 +76,22 @@
                                 <td>{{$item->luot_xem}}</td>
                                 <td>{{$item->created_at}}</td>
                                 <td>{{$item->mo_ta}}</td>
-                                <td>{{$item->danh_muc_id == 2 ? 'Thời Trang Nam':'Thời Trang Nữ' }}</td>
-                                <td>{{$item->trang_thai == 2 ? 'Còn Hàng':'Hết Hàng'}}</td>
+                                <td>{{$item->danh_muc_id == 1 ? 'Thời Trang Nam':'Thời Trang Nữ' }}</td>
+                                <td>{{$item->trang_thai == 1 ? 'Còn Hàng':'Hết Hàng'}}</td>
                                 <td>
                                     <a href="" class="btn btn-success">Xem Chi Tiết</a>
                                     <a href="{{route('quantri.edit',$item->id)}}"class="btn btn-info">Sửa</a>
-                                    <a href=""class="btn btn-danger">Xóa</a>
+                                    <form action="{{route('quantri.destroy',$item->id)}}" method="POST" onsubmit="return confirm('Bạn có muốn xóa không')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger">Xóa</button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    {{$listSanPham->links('pagination::bootstrap-5')}}
                 </div>
             </div>
         </div><!--end col-->

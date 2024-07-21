@@ -2,8 +2,9 @@
 
 namespace App\Models;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SanPham extends Model
 {
@@ -21,6 +22,7 @@ class SanPham extends Model
     public function deleteProduct($id,$params){
         DB::table('sanphams')->where('id',$id)->delete();
     }
+    use SoftDeletes;
     protected $table='sanphams';
     protected $fillable = [
         'danh_muc_id',

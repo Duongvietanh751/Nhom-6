@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('luot_xem')->default(0);
             $table->text('mo_ta')->nullable();
             $table->string('trang_thai');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
