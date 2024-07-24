@@ -29,8 +29,8 @@
         @endif
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <a href="{{route('quantri.create')}}" class="btn btn-primary mb-3">Thêm Mới</a>
-                    <form action="{{route('quantri.index')}}" method="GET">
+                    <a href="" class="btn btn-primary mb-3">Thêm Mới</a>
+                    <form action="" method="GET">
                         @csrf
                         <div class="input-group">
                             <select name="searchTrangThai" id="" class="form-select">

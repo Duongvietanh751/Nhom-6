@@ -1,43 +1,42 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class SanPham extends Model
 {
     use HasFactory;
-    // public function getList(){
-    //     $listSanPham=DB::table('sanphams')->orderBy('id','desc')->get();
-    // }
-    public function createProduct($data){
-        DB::table('sanphams')->insert($data);
-    }
-    public function updateProduct($id){
-        $san_pham = DB::table('sanphams')->where('id',$id)->first();
-        return $san_pham;
-    }
-    public function deleteProduct($id,$params){
-        DB::table('sanphams')->where('id',$id)->delete();
-    }
-    use SoftDeletes;
-    protected $table='sanphams';
     protected $fillable = [
-        'danh_muc_id',
+        'ma_san_pham',
         'ten_san_pham',
+        'hinh_anh',
         'gia_san_pham',
         'gia_khuyen_mai',
-        'hinh_anh',
+        'mo_ta_ngan',
+        'noi_dung',
         'so_luong',
         'luot_xem',
-        'mo_ta',
+        'ngay_nhap',
+        'danh_muc_id',
         'trang_thai',
-        'created_at',
-        'updated_at',
-    ] ;
-    public function danhmuc(){
-        return $this->belongsTo(DanhMuc::class,);
+        'hang_moi_ve',
+        'hang_hot',
+        'uu_dai',
+        'is_show_home',
+    ];
+    protected $casts = [
+        'trang_thai'=>'boolean',
+        'hang_moi_ve'=>'boolean',
+        'hang_hot'=>'boolean',
+        'uu_dai'=>'boolean',
+        'is_show_home'=>'boolean',
+    ];
+    public function DanhMuc(){
+        return $this->belongsTo(DanhMuc::class);
+    }
+    public function hinhAnhSanPham(){
+        return $this->belongsTo(HinhAnhSanPham::class);
     }
 }
