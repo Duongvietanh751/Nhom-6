@@ -78,7 +78,7 @@
                                 <td>{{$item->mo_ta}}</td>
                                 <td>{{$item->danh_muc_id == 1 ? 'Thời Trang Nam':'Thời Trang Nữ' }}</td>
                                 <td>{{$item->trang_thai == 1 ? 'Còn Hàng':'Hết Hàng'}}</td>
-                                <td>
+                                <td class="d-inline">
                                     <a href="" class="btn btn-success">Xem Chi Tiết</a>
                                     <a href="{{route('quantri.edit',$item->id)}}"class="btn btn-info">Sửa</a>
                                     <form action="{{route('quantri.destroy',$item->id)}}" method="POST" onsubmit="return confirm('Bạn có muốn xóa không')">
