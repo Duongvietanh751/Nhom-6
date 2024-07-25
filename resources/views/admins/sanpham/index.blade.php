@@ -29,7 +29,7 @@
         @endif
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <a href="" class="btn btn-primary mb-3">Thêm Mới</a>
+                    <a href="{{route('admins.sanpham.create')}}" class="btn btn-primary mb-3">Thêm Mới</a>
                     <form action="" method="GET">
                         @csrf
                         <div class="input-group">
@@ -49,14 +49,12 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Mã Sản Phẩm</th>
                                 <th>Tên Sản Phẩm</th>
-                                <th>Giá Sản Phẩm</th>
-                                <th>Giá Khuyển Mại</th>
                                 <th>Hình Ảnh</th>
-                                <th>Số Lượng</th>
-                                <th>Lượt Xem</th>
-                                <th>Ngày Nhập</th>
-                                <th>Mô Tả</th>
+                                <th>Giá Sản Phẩm</th>
+                                <th>Giá Khuyến Mại</th>
+                                <th>Số lượng</th>
                                 <th>Danh Mục</th>
                                 <th>Trạng Thái</th>
                                 <th>Chức Năng</th>
@@ -66,13 +64,15 @@
                             @foreach ($listSanPham as $item)
                             <tr>
                                 <td>{{$item->id}}</td>
+                                <td>{{$item->ma_san_pham}}</td>
                                 <td>{{$item->ten_san_pham}}</td>
-                                <td>{{$item->gia_san_pham}}</td>
-                                <td>{{$item->gia_khuyen_mai}}</td>
                                 <td>
                                     <img src="{{Storage::url($item->hinh_anh)}}" alt="" width="200px">
                                 </td>
+                                <td>{{number_format($item->gia_san_pham)}}</td>
+                                <td>{{ empty($item->gia_khuyen_mai) ? 0 : $item->gia_san_pham}}</td>
                                 <td>{{$item->so_luong}}</td>
+<<<<<<< HEAD
                                 <td>{{$item->luot_xem}}</td>
                                 <td>{{$item->created_at}}</td>
                                 <td>{{$item->mo_ta}}</td>
@@ -82,6 +82,15 @@
                                     <a href="" class="btn btn-success">Xem Chi Tiết</a>
                                     <a href="{{route('quantri.edit',$item->id)}}"class="btn btn-info">Sửa</a>
                                     <form action="{{route('quantri.destroy',$item->id)}}" method="POST" onsubmit="return confirm('Bạn có muốn xóa không')">
+=======
+                                <td>{{$item->DanhMuc->ten_danh_muc }}</td>
+                                <td class="{{$item->trang_thai == true ? 'text-success' : 'text-danger'}}">
+                                    {{$item->trang_thai == true ? 'Hiển Thị' : 'Ẩn'}}
+                                </td>
+                                <td>
+                                    <a href="{{route('admins.sanpham.edit',$item->id)}}"class="btn btn-info">Sửa</a>
+                                    <form action="{{route('admins.sanpham.destroy',$item->id)}}" method="POST" onsubmit="return confirm('Bạn có muốn xóa không')" class="d-inline">
+>>>>>>> 85f48f95bbcb21921f57ea7fb4a9eaf4fda050fb
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger">Xóa</button>

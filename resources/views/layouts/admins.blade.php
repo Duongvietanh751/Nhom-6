@@ -10,10 +10,8 @@
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico')}}">
-
     <!-- jsvectormap css -->
     <link href="{{ asset('admin/assets/libs/jsvectormap/css/jsvectormap.min.css')}}" rel="stylesheet" type="text/css" />
-
     <!--Swiper slider css-->
     <link href="{{ asset('admin/assets/libs/swiper/swiper-bundle.min.css')}}" rel="stylesheet" type="text/css" />
 
@@ -28,7 +26,7 @@
     <!-- custom Css-->
     <link href="{{ asset('admin/assets/css/custom.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
+    @yield('css')
 </head>
 
 <body>
@@ -39,6 +37,15 @@
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
+                    {{-- Hiển thị thông báo --}}
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-bottom:30px">
+                            {{session('success')}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+
+                            </button>
+                        </div>
+                    @endif
                     @yield('content')
                 </div>
                 <!-- container-fluid -->
@@ -73,7 +80,6 @@
 
     <!-- Dashboard init -->
     <script src="{{ asset('admin/assets/js/pages/dashboard-ecommerce.init.js')}}"></script>
-
     <!-- App js -->
     <script src="{{ asset('admin/assets/js/app.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

@@ -46,7 +46,7 @@
                             </div>
                             <div>
                                 <label for="name" class="form-label">Trạng Thái</label>
-                                <select name="trang_thai" id="" class="form-select @error('trang_thai') is-invalid @enderror" value="{{$DanhMuc->trang_thai}}>
+                                <select name="trang_thai" id="" class="form-select @error('trang_thai') is-invalid @enderror" value="{{$DanhMuc->trang_thai}}">
                                     <option value="0">Ẩn</option>
                                     <option value="1">Hiển Thị</option>
                                 </select>

@@ -17,7 +17,7 @@
         </div>
     </div>
 </div>
-<form action="{{route('quantri.update',$SanPham->id)}}" method="post" enctype="multipart/form-data" >
+<form action="{{route('admins.sanpham.update',$SanPham->id)}}" method="post" enctype="multipart/form-data" >
     @csrf
     @method('PUT')
     <div class="row">

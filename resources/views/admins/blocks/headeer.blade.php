@@ -762,7 +762,7 @@
                             <div class="collapse menu-dropdown" id="#sidebarCatalogues">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="" target="_blank" class="nav-link" data-key="t-horizontal">Danh sách</a>
+                                        <a href="{{route('admins.sanpham.index')}}" target="_blank" class="nav-link" data-key="t-horizontal">Danh sách</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="" target="_blank" class="nav-link" data-key="t-horizontal">Thêm Mới</a>
