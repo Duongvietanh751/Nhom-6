@@ -22,11 +22,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            @if (session('success'))
-            <div class="alert alert-success">
-                {{session('success')}}
-            </div>
-        @endif
+
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <a href="{{route('admins.sanpham.create')}}" class="btn btn-primary mb-3">Thêm Mới</a>

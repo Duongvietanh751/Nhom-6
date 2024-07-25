@@ -53,15 +53,38 @@ class SanPhamController extends Controller
     {
         if($request->isMethod('POST')){
             $params= $request->except('_token');
-
+            //chuyển đổi giá trị checkbox thành boolean
+            $params['trang_thai']=$request->has('trang_thai') ? 1 : 0;
+            $params['hang_moi_ve']=$request->has('hang_moi_ve') ? 1 : 0;
+            $params['hang_hot']=$request->has('hang_hot') ? 1 : 0;
+            $params['uu_dai']=$request->has('uu_dai') ? 1 : 0;
+            $params['is_show_home']=$request->has('is_show_home') ? 1 : 0;
+            // Xử Lý ảnh đại diện
             if($request->hasFile('hinh_anh')){
-                $filename=$request->file('hinh_anh')->store('uploads/quantri','public');
+                $params['hinh_anh'] = $request->file('hinh_anh')->store('uploads/sanpham','public');
             }else{
-                $filename=null;
+                $params['hinh_anh']=null;
             }
-            $params['hinh_anh']=$filename;
-            SanPham::create($params);
-            return redirect()->route('quantri.index')->with('success','Thêm sản Phẩm Thành Công');
+            //Thêm sản Phẩm
+            $sanPham = SanPham::query()->create($params);
+            //Lấy id sản phẩm vừa thêm để thêm được album 
+            $sanPhamID = $sanPham->id;
+
+            // xử lý album 
+            if($request->hasFile('list_hinh_anh')){
+                foreach($request->file('list_hinh_anh') as $image){
+                    if($image){
+                        $path =$image->store('uploads/hinhanhsanpham/id_'.$sanPhamID, 'public');
+                        $sanPham->hinhAnhSanPham()->create(
+                            [
+                                'san_pham_id' => $sanPhamID,
+                                'hinh_anh' => $path
+                            ]
+                        );
+                    }
+                }
+            }
+            return redirect()->route('admins.sanpham.index')->with('success','Thêm sản Phẩm Thành Công');
          }
     }
 

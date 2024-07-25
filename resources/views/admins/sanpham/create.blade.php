@@ -65,7 +65,7 @@
                             </div>
                             <div>
                                 <label for="name" class="form-label">Danh Mục</label>
-                                <select name="danh_muc_id" class="form-select  @error('danh_muc_id') is-invalid @enderror">
+                                <select name="danh_muc_id" class="form-select ">
                                     <option selected>--Chọn Danh Mục --</option>
                                     @foreach ($listDanhMuc as $item)
                                         <option value="{{$item->id}}"
@@ -73,11 +73,8 @@
                                             {{$item->ten_danh_muc}}
                                         </option>
                                     @endforeach
-                                    <option value="2">Thời Trang Nữ</option>
                                 </select>
-                                @error('danh_muc_id')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
+                                
                             </div>
                            
                         </div>
