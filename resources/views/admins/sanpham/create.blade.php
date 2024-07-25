@@ -2,6 +2,12 @@
 @section('title')
     Thêm Mới Sản Phẩm
 @endsection
+@section('css')
+        <!-- quill css -->
+        <link href="{{ asset('admin/assets/libs/quill/quill.core.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('admin/assets/libs/quill/quill.bubble.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('admin/assets/libs/quill/quill.snow.css')}}" rel="stylesheet" type="text/css" />
+@endsection
 @section('content')
 <div class="row">
     <div class="col-12">
@@ -18,7 +24,7 @@
         </div>
     </div>
 </div>
-<form action="{{route('quantri.store')}}" method="POST" enctype="multipart/form-data" >
+<form action="{{route('admins.sanpham.store')}}" method="POST" enctype="multipart/form-data" >
     @csrf
     <div class="row">
         <div class="col-lg-12">
@@ -29,6 +35,13 @@
                 <div class="card-body">
                     <div class="row gy-4">
                         <div class="col-md-4">
+                            <div>
+                                <label for="name" class="form-label">Mã Sản Phẩm</label>
+                                <input type="text" class="form-control @error('ma_san_pham') is-invalid @enderror" name="ma_san_pham" id="name" value="{{old('ma_san_pham')}}">
+                                @error('ma_san_pham')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
                             <div>
                                 <label for="name" class="form-label">Tên Sản Phẩm</label>
                                 <input type="text" class="form-control @error('ten_san_pham') is-invalid @enderror" name="ten_san_pham" id="name" value="{{old('ten_san_pham')}}">
@@ -51,12 +64,22 @@
                                 @enderror
                             </div>
                             <div>
-                                <label for="name" class="form-label">Hình Ảnh</label>
-                                <input type="file" class="form-control" name="hinh_anh" id="name" onchange="showImage(event)">
+                                <label for="name" class="form-label">Danh Mục</label>
+                                <select name="danh_muc_id" class="form-select  @error('danh_muc_id') is-invalid @enderror">
+                                    <option selected>--Chọn Danh Mục --</option>
+                                    @foreach ($listDanhMuc as $item)
+                                        <option value="{{$item->id}}"
+                                            {{old('danh_muc_id') == $item->id ? 'selected' : ''}}>
+                                            {{$item->ten_danh_muc}}
+                                        </option>
+                                    @endforeach
+                                    <option value="2">Thời Trang Nữ</option>
+                                </select>
+                                @error('danh_muc_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
-                            <div style="margin: 10px">
-                                <img src="" alt="Hình Ảnh Sản Phẩm" name="hinh_anh" id="image_san_pham" style="width :300px; display:none">
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -79,33 +102,114 @@
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                            {{-- <div>
-                                <label for="name" class="form-label">Ngày Nhập</label>
-                                <input type="text" class="form-control" name="ngay_nhap" id="name">
-                            </div> --}}
                             <div>
-                                <label for="name" class="form-label">Mô Tả</label>
-                                <textarea class="form-control" name="mo_ta" id="description" rows="2"></textarea>
+                                <label for="name" class="form-label">Ngày Nhập</label>
+                                <input type="date" class="form-control @error('ngay_nhap') is-invalid @enderror" name="ngay_nhap" id="name" value="{{old('ngay_nhap')}}">
+                                @error('ngay_nhap')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div>
-                                <label for="name" class="form-label">Danh Mục</label>
-                                <select name="danh_muc_id" id="" class="form-select  @error('danh_muc_id') is-invalid @enderror">
-                                    <option value="1">Thời Trang Nam</option>
-                                    <option value="2">Thời Trang Nữ</option>
-                                </select>
-                                @error('danh_muc_id')
+                                <label for="name" class="form-label">Mô Tả Ngắn</label>
+                                <textarea type="date" class="form-control @error('mo_ta_ngan') is-invalid @enderror" name="mo_ta_ngan" id="name" value="{{old('mo_ta_ngan')}}"></textarea>
+                                @error('mo_ta_ngan')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div>
                                 <label for="name" class="form-label">Trạng Thái</label>
                                 <select name="trang_thai" id="" class="form-select @error('trang_thai') is-invalid @enderror">
-                                    <option value="1">Còn Hàng</option>
-                                    <option value="2">Hết Hàng</option>
+                                    <option value="0">Ẩn</option>
+                                    <option value="1">Hiển Thị</option>
                                 </select>
                                 @error('trang_thai')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header align-items-center d-flex">
+                    <h4 class="card-title mb-0">Mô tả chi tiết sản phẩm</h4>
+                </div><!-- end card header -->
+                <div class="card-body">
+                    <div class="" id="quill-editor" style="height: 350px">
+                        
+                    </div>
+                    <textarea name="noi_dung" id="noi_dung_content" class="d-none"></textarea>
+                </div><!-- end card-body -->
+            </div><!-- end card -->
+        </div>
+        <!-- end col -->
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header align-items-center d-flex">
+                    <h4 class="card-title mb-0 flex-grow-1">Hình Ảnh</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row gy-4">
+                            <div>
+                                <label for="name" class="form-label">Hình Ảnh</label>
+                                <input type="file" class="form-control" name="hinh_anh" id="name" onchange="showImage(event)">
+                            </div>
+                            <div style="margin: 10px">
+                                <img src="" alt="Hình Ảnh Sản Phẩm" name="hinh_anh" id="image_san_pham" style="width :100px; display:none">
+                            </div>
+                            <div>
+                                <label for="name" class="form-label">Album Hình Ảnh</label>
+                                <i class="mdi mdi-plus text-muted fs-18 rounded-2 border p-1" style="cursor: pointer" id="add-row"></i>
+                                <table class="table align-middle table-nowrap mb-0">
+                                    <tbody id="image-table-body">
+                                        <tr>
+                                            <td class="d-flex align-items-center">
+                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbIwiKbRMRJkaJBTn7kU1Atnt_Qd6exNbacQ&s" alt="Hình Ảnh Sản Phẩm" name="hinh_anh" id="preview_0" style="width :70px" class="me-3">
+                                                <input type="file" class="form-control" name="list_hinh_anh[id_0]" id="hinh_anh" onchange="previewImage(this,0)">
+                                            </td>
+                                            <td>
+                                            <i class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1" style="cursor: pointer" onclick="removeRow(this)"></i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header align-items-center d-flex">
+                    <h4 class="card-title mb-0 flex-grow-1">Tùy Chỉnh Thông Tin Sản Phẩm</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row gy-4">
+                        <div class="d-flex justify-content-between ">
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input bg-secondary" type="checkbox" name="hang_moi_ve">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">NEW</label>
+                            </div>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input bg-danger" type="checkbox" name="hang_hot">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">HOT</label>
+                            </div>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input bg-success" type="checkbox" name="uu_dai">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">HOT DEAL</label>
+                            </div>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" name="is_show_home">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">SHOW HOME</label>
                             </div>
                         </div>
                     </div>
@@ -144,4 +248,66 @@
         }
     }
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded',function(){
+        var quill = new Quill("#quill-editor",{
+            theme:"snow",
+        })
+        //Hiển thị nội dung cũ
+        var old_content = `{!! old('noi_dung') !!}`;
+        quill.root.innerHTML=old_content
+        //Cập nhật lại textarea ẩn khi nội dung của quill-editor thay đỏi
+        quill.on('text-change',function(){
+            var html = quill.root.innerHTML;
+            document.getElementById('noi_dung_content').value = html
+        })
+    })
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded',function(){
+            var rowCount = 1 ;
+           document.getElementById('add-row').addEventListener('click', function(){
+            var tableBody = document.getElementById('image-table-body');
+
+            var newRow = document.createElement('tr');
+            newRow.innerHTML = `
+             <td class="d-flex align-items-center">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbIwiKbRMRJkaJBTn7kU1Atnt_Qd6exNbacQ&s" alt="Hình Ảnh Sản Phẩm" name="hinh_anh" id="preview_${rowCount}" style="width :70px">
+                <input type="file" class="form-control" name="list_hinh_anh[id_${rowCount}]" id="name" onchange="previewImage(this,${rowCount})">
+            </td>
+            <td>
+                <i class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1" style="cursor: pointer" onclick="removeRow(this)"></i>
+            </td>
+            `;
+            tableBody.appendChild(newRow);
+            rowCount++;
+           })
+
+        });
+        function previewImage(input,rowIndex){
+            if(input.files && input.files[0]){
+                const reader = new FileReader();
+
+            reader.onload = function (e) {
+                document.getElementById(`preview_${rowIndex}`).setAttribute('src',e.target.result)
+            }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        function removeRow (item) {
+            var row = item.closest('tr');
+            row.remove();
+        }
+</script>
+<!-- ckeditor -->
+<script src="{{ asset('admin/assets/libs/@ckeditor/ckeditor5-build-classic/build/ckeditor.js')}}"></script>
+
+<!-- quill js -->
+<script src="{{ asset('admin/assets/libs/quill/quill.min.js')}}"></script>
+
+<!-- init js -->
+<script src="{{ asset('admin/assets/js/pages/form-editor.init.js')}}"></script>
+<script src="{{ asset('admin/assets/js/app.js')}}"></script>
 @endsection

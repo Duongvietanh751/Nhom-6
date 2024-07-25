@@ -24,7 +24,7 @@ class SanPhamController extends Controller
         $search=$request->input('search');
         $searchTrangThai=$request->input('searchTrangThai');
 
-        $listSanPham=SanPham::query()->with(['danhmuc'])->latest('id')
+        $listSanPham=SanPham::orderByDesc('trang_thai')->with(['danhmuc'])->latest('id')
         ->when($search,function($query,$search){
             return $query->where('ten_san_pham','like',"%{$search}")
                             ->orWhere('so_luong','like',"%{$search}");
@@ -42,7 +42,8 @@ class SanPhamController extends Controller
      */
     public function create()
     {
-        return view('admins.sanpham.create');
+        $listDanhMuc=DanhMuc::query()->get();
+        return view('admins.sanpham.create',compact('listDanhMuc'));
     }
 
     /**
