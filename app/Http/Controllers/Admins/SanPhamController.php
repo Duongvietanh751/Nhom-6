@@ -50,19 +50,18 @@ class SanPhamController extends Controller
      */
     public function store(SanPhamRequest $request)
     {
-        if($request->isMethod('POST')){
-            $params= $request->except('_token');
-
-            if($request->hasFile('hinh_anh')){
-                $filename=$request->file('hinh_anh')->store('uploads/quantri','public');
-            }else{
-                $filename=null;
-            }
-            $params['hinh_anh']=$filename;
-            SanPham::create($params);
-            return redirect()->route('quantri.index')->with('success','Thêm sản Phẩm Thành Công');
-         }
+    if($request->isMethod('POST')){
+        $params=$request->exists('_token');
+        if($request->hasFile('hinh_anh')){
+            $filepath= $request->file('hinh_anh')->store('uploads/quantri','public');
+        }else{
+            $filepath=null;
+        }
+        $params['hinh_anh']=$filepath;
+        SanPham::create($params);
+        return redirect()->route('quantri.index')->with('success','Thêm thanh cong');
     }
+}
 
     /**
      * Display the specified resource.
@@ -78,7 +77,7 @@ class SanPhamController extends Controller
     public function edit(string $id)
     {
         //Sử dụng query buider
-        $SanPham=$this->san_phams->updateProduct($id);
+        $SanPham=SanPham::finOrFail($id);
         return view('admins.sanpham.update',compact('SanPham'));
     }
 
@@ -88,27 +87,17 @@ class SanPhamController extends Controller
     public function update(Request $request, string $id)
     {
         if($request->isMethod('PUT')){
-
-            $params= $request->except('_token','_method');
-            
-
-            //Xử dụng eloquent
-            $SanPham=SanPham::findOrFail($id);
-
-            //Xử lý hình ảnh
+            $params=$request->exists('_token','_method');
+            $SanPham=SanPham::finOrFail($id);
             if($request->hasFile('hinh_anh')){
-                //Nếu có đẩy ảnh mới thì xóa ảnh cũ và lấy ảnh mới thêm vào DB
-                if($SanPham->hinh_anh){
-                    Storage::disk('public')->delete($SanPham->hinh_anh);
+                if($SanPham->hinh_anh && Storage::disk('public')->exists($SanPham->hinh_anh)){
+                    Storage::disk('public') ->delete($SanPham->hinh_anh);
                 }
-                $params['hinh_anh']=$request->file('hinh_anh')->store('uploads/quantri','public');
+
             }else{
                 $params['hinh_anh']=$SanPham->hinh_anh;
             }
-            //Xử lý cập nhật thông tin
-            //Eloquent
-            $SanPham->update($params);
-            return redirect()->route('quantri.index')->with('success','Cập nhật thành công');
+            $SanPham=SanPham::updated($params);
         }
     }
 
