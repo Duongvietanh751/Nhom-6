@@ -52,8 +52,8 @@ Route::middleware(checkRoleAdminMiddleware::class)->prefix('admins')
         Route::post('/store',[SanPhamController::class,'store'])->name('store');
         Route::get('/show/{id}',[SanPhamController::class,'show'])->name('show');
         Route::get('{id}/edit',[SanPhamController::class,'edit'])->name('edit');
-        Route::get('{id}/update',[SanPhamController::class,'update'])->name('update');
-        Route::get('{id}/destroy',[SanPhamController::class,'destroy'])->name('destroy');
+        Route::put('{id}/update',[SanPhamController::class,'update'])->name('update');
+        Route::delete('{id}/destroy',[SanPhamController::class,'destroy'])->name('destroy');
 
     });
 });

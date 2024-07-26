@@ -22,11 +22,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            @if (session('success'))
-            <div class="alert alert-success">
-                {{session('success')}}
-            </div>
-        @endif
+
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <a href="{{route('admins.sanpham.create')}}" class="btn btn-primary mb-3">Thêm Mới</a>
@@ -72,17 +68,6 @@
                                 <td>{{number_format($item->gia_san_pham)}}</td>
                                 <td>{{ empty($item->gia_khuyen_mai) ? 0 : $item->gia_san_pham}}</td>
                                 <td>{{$item->so_luong}}</td>
-<<<<<<< HEAD
-                                <td>{{$item->luot_xem}}</td>
-                                <td>{{$item->created_at}}</td>
-                                <td>{{$item->mo_ta}}</td>
-                                <td>{{$item->danh_muc_id == 1 ? 'Thời Trang Nam':'Thời Trang Nữ' }}</td>
-                                <td>{{$item->trang_thai == 1 ? 'Còn Hàng':'Hết Hàng'}}</td>
-                                <td class="d-inline">
-                                    <a href="" class="btn btn-success">Xem Chi Tiết</a>
-                                    <a href="{{route('quantri.edit',$item->id)}}"class="btn btn-info">Sửa</a>
-                                    <form action="{{route('quantri.destroy',$item->id)}}" method="POST" onsubmit="return confirm('Bạn có muốn xóa không')">
-=======
                                 <td>{{$item->DanhMuc->ten_danh_muc }}</td>
                                 <td class="{{$item->trang_thai == true ? 'text-success' : 'text-danger'}}">
                                     {{$item->trang_thai == true ? 'Hiển Thị' : 'Ẩn'}}
@@ -90,7 +75,6 @@
                                 <td>
                                     <a href="{{route('admins.sanpham.edit',$item->id)}}"class="btn btn-info">Sửa</a>
                                     <form action="{{route('admins.sanpham.destroy',$item->id)}}" method="POST" onsubmit="return confirm('Bạn có muốn xóa không')" class="d-inline">
->>>>>>> 85f48f95bbcb21921f57ea7fb4a9eaf4fda050fb
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger">Xóa</button>

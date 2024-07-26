@@ -77,7 +77,6 @@
 
     <!--Swiper slider js-->
     <script src="{{ asset('admin/assets/libs/swiper/swiper-bundle.min.js')}}"></script>
-
     <!-- Dashboard init -->
     <script src="{{ asset('admin/assets/js/pages/dashboard-ecommerce.init.js')}}"></script>
     <!-- App js -->
