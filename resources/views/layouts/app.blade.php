@@ -1,101 +1,74 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html>
+
+
+<!-- Mirrored from themeim.com/demo/comercio/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 11:56:33 GMT -->
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Meta Data -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>@yield('title')</title>
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+	<!-- Fav Icon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="{{asset('client/assets/img/fav-icons/apple-touch-icon.png')}}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{{asset('client/assets/img/fav-icons/favicon-32x32.png')}}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{{asset('client/assets/img/fav-icons/favicon-16x16.png')}}">
 
-    <title>Trang chủ</title>
+	<!-- Dependency Styles -->
+	<link rel="stylesheet" href="{{asset('client/dependencies/bootstrap/css/bootstrap.min.css')}}" type="text/css">
+	<link rel="stylesheet" href="{{asset('client/dependencies/fontawesome/css/fontawesome-all.min.css')}}" type="text/css">
+	<link rel="stylesheet" href="{{asset('client/dependencies/owl.carousel/css/owl.carousel.min.css')}}" type="text/css">
+	<link rel="stylesheet" href="{{asset('client/dependencies/owl.carousel/css/owl.theme.default.min.css')}}" type="text/css">
+	<link rel="stylesheet" href="{{asset('client/dependencies/flaticon/css/flaticon.css')}}" type="text/css">
+	<link rel="stylesheet" href="{{asset('client/dependencies/wow/css/animate.css')}}" type="text/css">
+	<link rel="stylesheet" href="{{asset('client/dependencies/jquery-ui/css/jquery-ui.css')}}" type="text/css">
+	<link rel="stylesheet" href="{{asset('client/dependencies/venobox/css/venobox.css')}}" type="text/css">
+	<link rel="stylesheet" href="{{asset('client/dependencies/slick-carousel/css/slick.css')}}" type="text/css">
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+	<!-- Site Stylesheet -->
+	<link rel="stylesheet" href="{{asset('client/assets/css/app.css')}}" type="text/css">
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('themeLogin/img/favicon.png')}}">
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="{{asset('themeLogin/css/bootstrap.min.css')}}">
-	<!-- Fontawesome CSS -->
-	<link rel="stylesheet" href="{{asset('themeLogin/css/fontawesome-all.min.css')}}">
-	<!-- Flaticon CSS -->
-	<link rel="stylesheet" href="{{asset('themeLogin/font/flaticon.css')}}">
-	<!-- Google Web Fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
-	<!-- Custom CSS -->
-	<link rel="stylesheet" href="{{asset('themeLogin/style.css')}}">
-    <!-- Scripts -->
     @viteReactRefresh
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+<body id="home-version-1" class="home-version-1" data-style="default">
 
-                    </ul>
+	<div class="site-content">
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
+        @include('clients.blocks.header')
+        @yield('content')
+        @include('clients.blocks.footer')
 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
 
-                                <div>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-        <script src="{{asset('themeLogin/js/jquery.min.js')}}"></script>
-        <!-- Bootstrap js -->
-        <script src="{{asset('themeLogin/js/bootstrap.min.js')}}"></script>
-        <!-- Imagesloaded js -->
-        <script src="{{asset('themeLogin/js/imagesloaded.pkgd.min.js')}}"></script>
-        <!-- Validator js -->
-        <script src="{{asset('themeLogin/js/validator.min.js')}}"></script>
-        <!-- Custom Js -->
-        <script src="{{asset('themeLogin/js/main.js')}}"></script>
-    </div>
+
+	</div>
+	<!-- /#site -->
+
+	<!-- Dependency Scripts -->
+	<script src="{{asset('client/dependencies/jquery/jquery.min.js')}}"></script>
+	<script src="{{asset('client/dependencies/popper.js/popper.min.js')}}"></script>
+	<script src="{{asset('client/dependencies/bootstrap/js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('client/dependencies/owl.carousel/js/owl.carousel.min.js')}}"></script>
+	<script src="{{asset('client/dependencies/wow/js/wow.min.js')}}"></script>
+	<script src="{{asset('client/dependencies/isotope-layout/js/isotope.pkgd.min.js')}}"></script>
+	<script src="{{asset('client/dependencies/imagesloaded/js/imagesloaded.pkgd.min.js')}}"></script>
+	<script src="{{asset('client/dependencies/jquery.countdown/js/jquery.countdown.min.js')}}"></script>
+	<script src="{{asset('client/dependencies/gmap3/js/gmap3.min.js')}}"></script>
+	<script src="{{asset('client/dependencies/venobox/js/venobox.min.js')}}"></script>
+	<script src="{{asset('client/dependencies/slick-carousel/js/slick.js')}}"></script>
+	<script src="{{asset('client/dependencies/headroom/js/headroom.js')}}"></script>
+	<script src="{{asset('client/dependencies/jquery-ui/js/jquery-ui.min.js')}}"></script>
+	<!--Google map api -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsBrMPsyNtpwKXPPpG54XwJXnyobfMAIc"></script>
+
+	<!-- Site Scripts -->
+	<script src="{{asset('client/assets/js/app.js')}}"></script>
 </body>
+
+
+<!-- Mirrored from themeim.com/demo/comercio/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 11:56:33 GMT -->
 </html>

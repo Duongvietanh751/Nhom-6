@@ -33,7 +33,7 @@ class SanPhamController extends Controller
         ->when($searchTrangThai !== null, function ($query) use ($searchTrangThai) {
             return $query->where('trang_thai', '=', $searchTrangThai);
         })
-        ->paginate(3);
+        ->paginate(10);
          // cho hiển thị bao nhiêu san phẩm paginate(viết vô đây bn bản);
         return view('admins.sanpham.index',compact('listSanPham'));
     }

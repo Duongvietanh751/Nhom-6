@@ -1,51 +1,71 @@
 @extends('layouts.app')
-
+@section('title')
+    REGISTER
+@endsection
 @section('content')
-<div id="preloader" class="preloader">
-    <div class='inner'>
-        <div class='line1'></div>
-        <div class='line2'></div>
-        <div class='line3'></div>
-    </div>
-</div>
-<section class="fxt-template-animation fxt-template-layout9" data-bg-image="{{asset('themeLogin/img/figure/bg9-l.jpg')}}">
-    <div class="container">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-lg-3">
-                <div class="fxt-header">
-                    <a href="{{asset('themeLogin/login-9.html')}}" class="fxt-logo"><img src="{{asset('themeLogin/img/logo-9.png')}}">></a>
+<section class="breadcrumb-area">
+    <div class="container-fluid custom-container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bc-inner">
+                    <p><a href="#">Home  |</a> REGISTER</p>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="fxt-content">
-                    <h2>Register into your account</h2>
-                    <div class="fxt-form">
-                        <form method="POST" action="{{ route('register') }}">
-                            @csrf
-                            <div class="form-group">
-                                <div class="fxt-transformY-50 fxt-transition-delay-1">
-                                    <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="name">
-                                </div>
+            <!-- /.col-xl-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+
+<!--=========================-->
+<!--=        Login         =-->
+<!--=========================-->
+
+
+
+<!--Login  area
+============================================= -->
+
+<section class="contact-area">
+    <div class="container-fluid custom-container">
+        <div class="section-heading pb-30">
+            <h3>REGISTER <span>Account</span></h3>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-sm-9 col-md-8 col-lg-6 col-xl-4">
+                <div class="contact-form login-form">
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="name">
                                 @error('name')
                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                         </span>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <div class="fxt-transformY-50 fxt-transition-delay-1">
-                                    <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" required autocomplete="email" placeholder="email">
-                                </div>
+                            <div class="col-xl-12">
+                                <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" name="email" placeholder="email" required autocomplete="email" autofocu>
                                 @error('email')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                 @enderror
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
-                            <div class="form-group">
-                                <div class="fxt-transformY-50 fxt-transition-delay-2">
-                                    <input id="password" type="password" name="password"class="form-control @error('password') is-invalid @enderror" required autocomplete="new-password" placeholder="password">
-                                    <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
+                            <div class="col-xl-12">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="********" required="required">
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-xl-12">
+                                <div>
+                                <input id="password" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="confirm password">
+                                <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
                                 </div>
                                 @error('password')
                                                         <span class="invalid-feedback" role="alert">
@@ -53,41 +73,63 @@
                                                         </span>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <div class="fxt-transformY-50 fxt-transition-delay-2">
-                                    <input id="password" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="confirm password">
-                                    <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
-                                </div>
-                                @error('password')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                @enderror
+                            <div class="col-xl-12">
+                                <input type="submit" value="REGISTER">
                             </div>
-                            <div class="form-group">
-                                <div class="fxt-transformY-50 fxt-transition-delay-3">
-                                    <div class="fxt-checkbox-area">
-                                        <div class="checkbox">
-                                            <input id="checkbox1" type="checkbox">
-                                            <label for="checkbox1">Keep me logged in</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="fxt-transformY-50 fxt-transition-delay-4">
-                                    <button type="submit" class="fxt-btn-fill">Register</button>
-                                </div>
-                            </div>
-                            <div class="fxt-footer">
-                                <div class="fxt-transformY-50 fxt-transition-delay-9">
-                                    <p>Already have an account?<a href="{{route('login')}}" class="switcher-text2 inline-text">Log in</a></p>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /.row end -->
+    </div>
+    <!-- /.container-fluid end -->
+</section>
+<!-- /.contact-area end -->
+
+<section class="login-now">
+    <div class="container-fluid custom-container">
+        <div class="col-12">
+            <span>Have account</span>
+            <a href="{{route('login')}}"  class="btn-two">Log in</a>
+        </div>
+        <!-- /.col-12 -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.login-now -->
+
+
+
+
+
+
+
+
+
+<!--=========================-->
+<!--=   Subscribe area      =-->
+<!--=========================-->
+
+<section class="subscribe-area style-two">
+    <div class="container container-two">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="subscribe-text">
+                    <h6>Join our newsletter</h6>
+                </div>
+            </div>
+            <!-- col-xl-6 -->
+
+            <div class="col-lg-7">
+                <div class="subscribe-wrapper">
+                    <input placeholder="Enter Keyword" type="text">
+                    <button type="submit">SUBSCRIBE</button>
                 </div>
             </div>
         </div>
     </div>
+    <!-- /.container-two -->
+</section>
+<!-- subscribe-area -->
 @endsection

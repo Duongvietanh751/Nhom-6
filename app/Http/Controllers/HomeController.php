@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SanPham;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $listProduct = SanPham::query()->get();
+
+        return view('clients.home',compact('listProduct'));
+    }
+    public function contact(){
+        return view('clients.chucnang.contact');
+    }
+    public function chiTietSanPham(string $id){
+        $sanPham = SanPham::query()->findOrFail($id);
+        $listSanPham = SanPham::query()->get();
+        return view('clients.chucnang.chitiet',compact('sanPham','listSanPham'));
     }
 }

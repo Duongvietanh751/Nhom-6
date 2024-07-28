@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admins\DanhMucController;
 use App\Http\Controllers\Admins\SanPhamController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Middleware\checkRoleAdminMiddleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth ;
@@ -17,15 +18,25 @@ use Illuminate\Support\Facades\Auth ;
 |
 */
 //Đường dẫn trang khách hàng
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('');
+// });
 //Đường dẫn sản phẩm controller (ADMIN)
 // Route::resource('quantri',SanPhamController::class)->middleware(checkRoleAdminMiddleware::class);
 
 // Dường dẫn đăng ký đăng nhập
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
+Route::post('Postcontact', [App\Http\Controllers\HomeController::class, 'Postcontact'])->name('Postcontact');
+Route::get('/product/detail/{id}',[App\Http\Controllers\HomeController::class,'chiTietSanPham'])->name('products.detail');
+
+//cart 
+Route::get('/list-cart',     [CartController::class,'listCart'])->name('cart.list');
+Route::post('/add-to-cart',  [CartController::class,'addCart'])->name('cartAdd');
+Route::post('/update-cart',  [CartController::class,'updateCart'])->name('cart.update');
+
+
 
 Route::middleware(checkRoleAdminMiddleware::class)->prefix('admins')
 ->as('admins.')
