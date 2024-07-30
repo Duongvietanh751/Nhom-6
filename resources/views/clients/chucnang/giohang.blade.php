@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('titile')
+@section('title')
     Giỏ Hàng
 @endsection
 @section('content')
@@ -24,12 +24,20 @@
 
 <section class="cart-area">
     <div class="container-fluid custom-container">
+        @if (session('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-bottom:30px">
+                            {{session('error')}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+
+                            </button>
+                        </div>
+         @endif
         <div class="row">
             <div class="col-xl-9">
                 <form action="{{route('cart.update')}}" method="POST">
                     @csrf
                 <div class="cart-table">
-                    <table class="tables">
+                    <table class="tables table-hover">
                         <thead>
                             <tr>
                                 <th></th>
@@ -126,7 +134,7 @@
                         <span>Order Note :</span>
                         <textarea></textarea>
                     </div>
-                    <a href="#">Proceed To Checkout</a>
+                    <a href="{{route('donhangs.create')}}">Proceed To Checkout</a>
                 </div>
                 <!-- /.cart-subtotal -->
 

@@ -4,6 +4,8 @@ use App\Http\Controllers\Admins\DanhMucController;
 use App\Http\Controllers\Admins\SanPhamController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OderController;
+use App\Http\Controllers\OrderController;
 use App\Http\Middleware\checkRoleAdminMiddleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth ;
@@ -36,8 +38,19 @@ Route::get('/list-cart',     [CartController::class,'listCart'])->name('cart.lis
 Route::post('/add-to-cart',  [CartController::class,'addCart'])->name('cartAdd');
 Route::post('/update-cart',  [CartController::class,'updateCart'])->name('cart.update');
 
+//Oder 
+Route::prefix('donhangs')
+    ->as('donhangs.')
+    ->group(function () {
+        Route::get('/',[OrderController::class,'index'])->name('index');
+        Route::get('/create',[OrderController::class,'create'])->name('create');
+        Route::post('/store',[OrderController::class,'store'])->name('store');
+        Route::get('/show/{id}',[OrderController::class,'show'])->name('show');
+        Route::put('{id}/update',[OrderController::class,'update'])->name('update');
+    });
 
 
+//ADMIN
 Route::middleware(checkRoleAdminMiddleware::class)->prefix('admins')
 ->as('admins.')
 ->group(function () {
