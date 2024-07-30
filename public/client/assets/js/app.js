@@ -309,7 +309,7 @@ var THEMEIM = THEMEIM || {};
         var total = subTotal + shipping;
         //cập nhật giá trị
         $('.sub-total').text(subtotal.toLocaleString('vi-VN') + 'VND');
-        $('.total-amount').text(subtotal.toLocaleString('vi-VN') + 'VND');
+        $('.total-amount').text(total.toLocaleString('vi-VN') + 'VND');
       }
       $(".qtybutton").on("click", function() {
         var $button = $(this);
@@ -335,7 +335,7 @@ var THEMEIM = THEMEIM || {};
         updateTotal();
       });
 
-      $('#quantityInput').on('change' , function(){
+      $('.quantityInput').on('change' , function(){
         var value =  parseInt($(this).val(),10);
 
         if(isNaN(value)|| value <1){

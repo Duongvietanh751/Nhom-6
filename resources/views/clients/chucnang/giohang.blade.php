@@ -64,8 +64,8 @@
                                 </td>
                                 {{-- Số Lượng --}}
                                 <td>
-                                    <div class="quantity">
-                                        <input type="number" class="quantityInput" id="subtotal" data-price="{{$item['gia']}}" value="{{$item['so_luong']}}" 
+                                    <div class="cart-plus-minus-button">
+                                        <input type="number" class="quantityInput cart-plus-minus" id="subtotal" data-price="{{$item['gia']}}" value="{{$item['so_luong']}}" 
                                         name="cart[{{ $key }}][so_luong]">
                                     </div>
                                 </td>
@@ -76,7 +76,6 @@
                                             <div class="price-box">
                                                 <span class="price">{{ number_format($item['gia'] , 0 , '' ,'.')}}</span>
                                                 <input type="hidden" name="cart[{{ $key }}][gia]" value="{{$item['gia']}}">
-
                                             </div>
                                         </li>
                                     </ul>
@@ -85,7 +84,7 @@
                                 {{-- Tổng Tiền --}}
                                 <td>
                                     <div class="total-price-box">
-                                        <span class="price subtotal">{{ number_format($item['gia'] * $item['so_luong'] , 0 , '' ,'.')}} VND</span>
+                                        <span class="subtotal">{{ number_format($item['gia'] * $item['so_luong'] , 0 , '' ,'.')}} VND</span>
                                     </div>
                                 </td>
 

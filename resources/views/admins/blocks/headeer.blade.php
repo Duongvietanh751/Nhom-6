@@ -711,7 +711,7 @@
             <!-- LOGO -->
             <div class="navbar-brand-box">
                 <!-- Dark Logo-->
-                <a href="" class="logo logo-dark">
+                <a href="{{route('admins.dasboard')}}" class="logo logo-dark">
                     <span class="logo-sm">
                         <img src="{{ asset('admin/assets/images/logo-sm.png')}}" alt="" height="22">
                     </span>
@@ -720,7 +720,7 @@
                     </span>
                 </a>
                 <!-- Light Logo-->
-                <a href="" class="logo logo-light">
+                <a href="{{route('admins.dasboard')}}" class="logo logo-light">
                     <span class="logo-sm">
                         <img src="{{ asset('admin/assets/images/logo-sm.png')}}" alt="" height="22">
                     </span>
@@ -741,7 +741,7 @@
                     <ul class="navbar-nav" id="navbar-nav">
                         <li class="menu-title"><span data-key="t-menu">Menu</span></li>
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                            <a class="nav-link menu-link" href="{{route('admins.danhmuc.index')}}" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                                 <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Danh Sách Danh Mục</span>
                             </a>
                             <div class="collapse menu-dropdown" id="sidebarDashboards">
@@ -750,13 +750,13 @@
                                         <a href="{{route('admins.danhmuc.index')}}" class="nav-link" data-key="t-analytics"> Danh sách </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="dashboard-crm.html" class="nav-link" data-key="t-crm"> Thêm Mới </a>
+                                        <a href="{{route('admins.danhmuc.create')}}" class="nav-link" data-key="t-crm"> Thêm Mới </a>
                                     </li>
                                 </ul>
                             </div>
                         </li> <!-- end Dashboard Menu -->
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="#sidebarCatalogues" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="#sidebarCatalogues">
+                            <a class="nav-link menu-link" href="{{route('admins.sanpham.index')}}" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="#sidebarCatalogues">
                                 <i class="ri-layout-3-line"></i> <span data-key="t-layouts">Danh mục sản phẩm</span>
                             </a>
                             <div class="collapse menu-dropdown" id="#sidebarCatalogues">
@@ -765,7 +765,7 @@
                                         <a href="{{route('admins.sanpham.index')}}" target="_blank" class="nav-link" data-key="t-horizontal">Danh sách</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="" target="_blank" class="nav-link" data-key="t-horizontal">Thêm Mới</a>
+                                        <a href="{{route('admins.sanpham.create')}}" target="_blank" class="nav-link" data-key="t-horizontal">Thêm Mới</a>
                                     </li>
                                 </ul>
                             </div>
