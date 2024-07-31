@@ -21,7 +21,6 @@
                     <ul id="navigation">
                         <li ><a href="{{route('home')}}" class="active">home</a>
                         </li>
-                        <li ><a href="collection.html">Collections</a>
                         </li>
                         <li ><a href="index.html">Men</a>
                             <div class="mega-menu">
@@ -97,6 +96,7 @@
                         <li ><a href="blog.html">Blog</a>
                         </li>
                         <li><a href="{{route('contact')}}">CONTACT</a></li>
+                        <li ><a href="{{route('donhangs.index')}}">ORDER</a>
                     </ul>
                 </div>
             </div>

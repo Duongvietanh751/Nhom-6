@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderRequest;
+use App\Mail\OrderConfirm;
 use App\Models\DonHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -15,7 +17,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        
+        $donHangs = Auth::user()->donHang;
+        $trangThai = DonHang::TRANG_THAI_DON_HANG;
+        return view('clients.donhangs.index',compact('donHangs','trangThai'));
     }
 
     /**
@@ -67,7 +71,10 @@ class OrderController extends Controller
                 DB::commit();
 
                 //Gửi mail khi đặt hàng thành công
+                Mail::to($donHang->email_nguoi_nhan)->queue(new OrderConfirm($donHang));
+                
                 session()->put('cart',[]);
+
                 return redirect()->route('donhangs.index')->with('success','Đơn Hàng đã được tạo thành công ! ');
             } catch (\Exception $e) {
                 DB::rollBack();
@@ -81,7 +88,11 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $donHang = DonHang::query()->findOrFail($id);
+        $trangThaiDonHang = DonHang::TRANG_THAI_DON_HANG;
+        $trangThaiThanhToan = DonHang::TRANG_THAI_THANH_TOAN;
+        return view('clients.donhangs.show',compact('donHang','trangThaiDonHang','trangThaiThanhToan'));
+
     }
 
     /**
