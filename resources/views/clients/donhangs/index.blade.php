@@ -57,15 +57,26 @@
                                 {{$item->created_at->format('d-m-y')}}
                                </td>
                                <td>
-                                {{$item->trang_thai_don_hang }}
+                                {{$trangThai[$item->trang_thai_don_hang]}}
                                </td>
                                <td>
                                 {{$item->tong_tien}}
                                </td>
                                <td>
-                                <a href="{{route('donhangs.show',$item->id)}}" class="btn btn-info">
-                                    View
-                                </a>
+                                    <a href="{{route('donhangs.show',$item->id)}}" class="btn btn-info">
+                                        View
+                                    </a>
+                                    <form action="{{route('donhangs.update',$item->id)}}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('PUT')
+                                        @if ($item->trang_thai_don_hang === $type_cho_xac_nhan)
+                                            <input type="hidden" name="huy_don_hang" value="1">
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn hủy đơn hàng không ?')">Hủy</button>
+                                        @elseif ($item->trang_thai_don_hang === $type_cho_xac_nhan)
+                                        <input type="hidden" name="da_giao_hang" value="1">
+                                        <button type="submit" class="btn btn-success" onclick="return confirm('Xác nhận đã nhận hàng')">Hủy</button>
+                                        @endif
+                                    </form>
                                </td>
                             </tr>
                             @endforeach

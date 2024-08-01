@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admins\DanhMucController;
+use App\Http\Controllers\Admins\DonHangController as AdminsDonHangController;
 use App\Http\Controllers\Admins\SanPhamController;
+use App\Http\Controllers\Admins\DonHangController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OderController;
@@ -78,6 +80,15 @@ Route::middleware(checkRoleAdminMiddleware::class)->prefix('admins')
         Route::get('{id}/edit',[SanPhamController::class,'edit'])->name('edit');
         Route::put('{id}/update',[SanPhamController::class,'update'])->name('update');
         Route::delete('{id}/destroy',[SanPhamController::class,'destroy'])->name('destroy');
+
+    });
+    Route::prefix('donhangs')
+    ->as('donhangs.')
+    ->group(function () {
+        Route::get('/',[DonHangController::class,'index'])->name('index');
+        Route::get('/show/{id}',[DonHangController::class,'show'])->name('show');
+        Route::put('{id}/update',[DonHangController::class,'update'])->name('update');
+        Route::delete('{id}/destroy',[DonHangController::class,'destroy'])->name('destroy');
 
     });
 });

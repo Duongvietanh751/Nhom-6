@@ -19,7 +19,9 @@ class OrderController extends Controller
     {
         $donHangs = Auth::user()->donHang;
         $trangThai = DonHang::TRANG_THAI_DON_HANG;
-        return view('clients.donhangs.index',compact('donHangs','trangThai'));
+        $type_cho_xac_nhan = DonHang::CHO_XAC_NHAN;
+        $type_dang_van_chuyen = DonHang::DANG_VAN_CHUYEN;
+        return view('clients.donhangs.index',compact('donHangs','trangThai','type_cho_xac_nhan','type_dang_van_chuyen'));
     }
 
     /**
@@ -95,20 +97,22 @@ class OrderController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
+   
     public function update(Request $request, string $id)
     {
-        //
+        $donHang = DonHang::query()->findOrFail($id);
+        DB::beginTransaction();
+        try {
+            if($request->has('huy_don_hang')){
+                $donHang->update(['trang_thai_don_hang' => DonHang::HUY_DON_HANG]);
+            }elseif($request->has('da_giao_hang')){
+                $donHang->update(['trang_thai_don_hang' => DonHang::DA_GIAO_HANG]);
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
+        return redirect()->back();
     }
 
     /**

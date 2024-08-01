@@ -770,7 +770,18 @@
                                 </ul>
                             </div>
                         </li><!-- end Dashboard Menu -->
-
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="{{route('admins.donhangs.index')}}" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="#sidebarCatalogues">
+                                <i class="ri-layout-3-line"></i> <span data-key="t-layouts">Danh mục đơn hàng</span>
+                            </a>
+                            <div class="collapse menu-dropdown" id="#sidebarCatalogues">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{route('admins.donhangs.index')}}" target="_blank" class="nav-link" data-key="t-horizontal">Danh sách</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
                 </div>
                 <!-- Sidebar -->
